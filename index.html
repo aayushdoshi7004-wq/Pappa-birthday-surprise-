@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>दिवाळीच्या प्रकाशात पप्पांचा वाढदिवस</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;800&family=Tiro+Devanagari+Marathi&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="gTerra" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e58a3a"/><stop offset="1" stop-color="#8f3a14"/></linearGradient>
+  <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b8861f"/><stop offset=".5" stop-color="#ffe08a"/><stop offset="1" stop-color="#b8861f"/></linearGradient>
+  <linearGradient id="gFlame" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe98a"/><stop offset=".6" stop-color="#ff9d2e"/><stop offset="1" stop-color="#f05a1a"/></linearGradient>
+  <radialGradient id="gLantern" cx=".5" cy=".5" r=".6"><stop offset="0" stop-color="#ffe9a0"/><stop offset=".5" stop-color="#f08a2c"/><stop offset="1" stop-color="#9a2a1c"/></radialGradient>
+</defs></svg>
+
+<div class="app" id="app">
+  <canvas id="sky" class="sky" aria-hidden="true"></canvas>
+  <button class="btn ghost back" id="backBtn" hidden>← मागे जा</button>
+  <button class="btn ghost sound" id="soundBtn">🔇 संगीत सुरू करा</button>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- १. दिवाळीची जादुई सुरुवात -->
+  <section class="screen active" id="s0">
+    <div class="toran"></div>
+    <div class="arch"></div>
+    <div class="floor"></div>
+    <svg class="lantern" viewBox="0 0 70 150" aria-hidden="true">
+      <line x1="35" y1="0" x2="35" y2="30" stroke="#e8b84a" stroke-width="2"/>
+      <circle cx="35" cy="30" r="4" fill="none" stroke="#e8b84a" stroke-width="2"/>
+      <path d="M22 44 L48 44 L42 36 L28 36Z" fill="url(#gGold)"/>
+      <path d="M22 44 H48 Q60 66 60 82 Q60 102 48 120 H22 Q10 102 10 82 Q10 66 22 44Z" fill="url(#gLantern)" stroke="#e8b84a" stroke-width="2"/>
+      <path d="M35 44 V120 M22 44 Q14 82 22 120 M48 44 Q56 82 48 120" stroke="#e8b84a" stroke-width="1.4" fill="none" opacity=".8"/>
+      <rect x="22" y="120" width="26" height="7" rx="2" fill="url(#gGold)"/>
+      <line x1="35" y1="127" x2="35" y2="142" stroke="#e8b84a" stroke-width="2"/>
+      <circle cx="35" cy="145" r="4" fill="#f08a2c"/>
+    </svg>
+    <h1 class="disp msg">पप्पा, तुमच्यासाठी<br>एक खास सरप्राइज आहे!</h1>
+    <div class="diyaRow">
+      <span class="dsm" data-diya="lit"></span>
+      <span class="dbig" data-diya="lit"></span>
+      <span class="dsm" data-diya="lit"></span>
+    </div>
+    <button class="btn" data-next>चला, सुरुवात करूया →</button>
+  </section>
+
+  <!-- २. जादुई दिवा -->
+  <section class="screen" id="s1">
+    <div class="glow"></div>
+    <div class="swap">
+      <h2 class="disp msg pre">एक दिवा लावूया…<br>पप्पांच्या आनंदासाठी!</h2>
+      <h2 class="disp msg post">तुमच्यामुळे आमच्या घरात<br>नेहमी आनंदाचा प्रकाश असतो!</h2>
+    </div>
+    <div class="dhuge" id="bigDiya" data-diya="unlit"></div>
+    <div class="btnslot">
+      <button class="btn act" id="litBtn">दिवा लावा 🪔</button>
+      <button class="btn nx" data-next>पुढे चला →</button>
+    </div>
+  </section>
+
+  <!-- ३. रांगोळी -->
+  <section class="screen" id="s2">
+    <div class="swap">
+      <h2 class="disp ttl pre">रंग भरून रांगोळी पूर्ण करा</h2>
+      <h2 class="disp msg post small">तुमच्या आनंदाने आमचं घर<br>नेहमी रंगांनी भरलेलं असतं!<br><span class="sub">पप्पा, हा रंगीत वाढदिवस तुमच्यासाठी!</span></h2>
+    </div>
+    <svg class="rg" id="rg" viewBox="-175 -175 350 350" aria-label="रांगोळी"></svg>
+    <div class="btnslot">
+      <button class="btn act" id="rgBtn">रंग भरा (१/५)</button>
+      <button class="btn nx" data-next>पुढे चला →</button>
+    </div>
+  </section>
+
+  <!-- ४. आठवणींची पेटी (पूर्ण-स्क्रीन फोटो) -->
+  <section class="screen photo" id="s3">
+    <div class="pbg"><img id="cImg" alt="पप्पांचा फोटो"></div>
+    <div class="scrim"></div>
+    <h2 class="disp ttl top">पप्पांच्या आठवणींची पेटी</h2>
+    <div class="chestwrap">
+      <div class="chest" id="chest">
+        <div class="glowin"></div>
+        <div class="cbody"><i class="band"></i><i class="band r"></i><i class="lock"></i></div>
+        <div class="lid"><i class="band"></i><i class="band r"></i></div>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="viewer">
+        <p class="cap disp" id="cCap"></p>
+        <div class="navrow">
+          <button class="btn ghost" id="cPrev">◀ मागचा फोटो</button>
+          <span id="cCount" class="count"></span>
+          <button class="btn ghost" id="cNext">पुढचा फोटो ▶</button>
+        </div>
+        <p class="sub" id="cHint"></p>
+      </div>
+      <div class="btnslot">
+        <button class="btn act" id="openBtn">पेटी उघडा</button>
+        <button class="btn nx" data-next>पुढे चला →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ५. फोटोचे गुपित (६ प्रकार, पूर्ण-स्क्रीन) -->
+  <section class="screen photo" id="s4">
+    <canvas id="revCv" class="rcv" aria-label="पप्पांचा खास फोटो"></canvas>
+    <div class="scrim"></div>
+    <h2 class="disp ttl top" id="revTitle">एक खास गुपित</h2>
+    <div class="bottom">
+      <div class="swap">
+        <p class="cap disp pre">बरं, आता बघूया पुढची झलक आपल्या बर्थडे बॉय ची…</p>
+        <p class="cap disp post" id="revCap"></p>
+      </div>
+      <div class="btnslot">
+        <button class="btn act" id="revBtn">गुपित उघडा ✨</button>
+        <button class="btn ghost" id="revNext" hidden>पुढचे गुपित ✨</button>
+        <button class="btn nx" data-next>पुढे चला →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ६. पप्पांचे खास क्षण (पूर्ण-स्क्रीन फोटो) -->
+  <section class="screen photo" id="s5">
+    <div class="pbg"><img id="mImg" alt="पप्पांचा फोटो"></div>
+    <div class="scrim"></div>
+    <h2 class="disp ttl top">पप्पांचे खास क्षण</h2>
+    <div class="bottom">
+      <div class="mcap">
+        <p class="disp mt" id="mTitle"></p>
+        <p id="mText"></p>
+      </div>
+      <div class="thumbs" id="thumbs"></div>
+      <p class="sub" id="mHint"></p>
+      <button class="btn nx" data-next>पुढे चला →</button>
+    </div>
+  </section>
+
+  <!-- ७. केकचे सरप्राइज -->
+  <section class="screen" id="s6">
+    <div class="sd l" data-diya="lit"></div>
+    <div class="sd r" data-diya="lit"></div>
+    <div class="swap">
+      <h2 class="disp msg pre small">आता वेळ आहे<br>पप्पांच्या वाढदिवसाच्या खास सरप्राइजची!</h2>
+      <h2 class="disp msg post small">वाढदिवसाच्या खूप खूप<br>शुभेच्छा, पप्पा!</h2>
+    </div>
+    <div class="cakewrap" id="cakeWrap">
+      <svg id="cakeSvg" viewBox="0 0 300 270" aria-label="वाढदिवसाचा केक">
+        <defs>
+          <linearGradient id="cPlate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ebe8f5"/><stop offset="1" stop-color="#8f8aa8"/></linearGradient>
+          <linearGradient id="cCho" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a1c12"/><stop offset=".5" stop-color="#63372a"/><stop offset="1" stop-color="#34180f"/></linearGradient>
+          <linearGradient id="cCream" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff1e4"/><stop offset=".5" stop-color="#f4d3bb"/><stop offset="1" stop-color="#fff1e4"/></linearGradient>
+          <linearGradient id="cPink" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fde4dc"/><stop offset=".5" stop-color="#f4b9a8"/><stop offset="1" stop-color="#fde4dc"/></linearGradient>
+          <linearGradient id="cStraw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f26b86"/><stop offset="1" stop-color="#c9304f"/></linearGradient>
+          <linearGradient id="cFlame" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff6c8"/><stop offset=".55" stop-color="#ffb43a"/><stop offset="1" stop-color="#f26a1a"/></linearGradient>
+        </defs>
+        <ellipse cx="150" cy="246" rx="140" ry="17" fill="url(#cPlate)"/>
+        <ellipse cx="150" cy="242" rx="124" ry="12" fill="#f4f1fa" opacity=".9"/>
+        <path d="M45 166 V224 Q45 240 150 240 Q255 240 255 224 V166 Z" fill="url(#cCho)"/>
+        <rect x="52" y="196" width="6" height="30" rx="3" fill="#fff" opacity=".08"/>
+        <ellipse cx="150" cy="166" rx="105" ry="16" fill="url(#cCream)"/>
+        <path d="M45 166 H255 V178 Q255 186 247 186 Q239 186 239 178 Q239 172 232 172 Q225 172 225 180 Q225 196 215 196 Q205 196 205 180 Q205 174 197 174 Q189 174 189 178 Q189 188 181 188 Q173 188 173 178 Q173 172 165 172 Q157 172 157 180 Q157 198 147 198 Q137 198 137 180 Q137 173 129 173 Q121 173 121 178 Q121 190 113 190 Q105 190 105 178 Q105 172 97 172 Q89 172 89 180 Q89 194 79 194 Q69 194 69 178 Q69 172 61 172 Q53 172 53 178 Q53 186 45 186 Z" fill="url(#cCream)"/>
+        <text x="150" y="224" text-anchor="middle" font-size="26" fill="#f6d27a" font-family="Tiro Devanagari Marathi, serif">पप्पा</text>
+        <path d="M85 106 V158 Q85 174 150 174 Q215 174 215 158 V106 Z" fill="url(#cPink)"/>
+        <ellipse cx="150" cy="106" rx="65" ry="10" fill="#ee5f7c"/>
+        <path d="M85 106 H215 V118 Q215 126 208 126 Q201 126 201 118 Q201 112 194 112 Q187 112 187 120 Q187 136 177 136 Q167 136 167 120 Q167 114 159 114 Q151 114 151 122 Q151 130 143 130 Q135 130 135 120 Q135 112 127 112 Q119 112 119 120 Q119 140 109 140 Q99 140 99 122 Q99 116 92 116 Q85 116 85 124 Z" fill="url(#cStraw)"/>
+        <ellipse cx="128" cy="104" rx="14" ry="2.5" fill="#fff" opacity=".25"/>
+        <circle cx="121" cy="110" r="4.5" fill="#b3122d"/><circle cx="140" cy="113" r="4.5" fill="#b3122d"/>
+        <circle cx="160" cy="113" r="4.5" fill="#b3122d"/><circle cx="179" cy="110" r="4.5" fill="#b3122d"/>
+        <g id="candles"></g>
+      </svg>
+    </div>
+    <div class="btnslot">
+      <button class="btn act" id="blowBtn">मेणबत्त्या विझवा</button>
+      <button class="btn nx" data-next>पुढे चला →</button>
+    </div>
+  </section>
+
+  <!-- ८. भव्य शेवट (पूर्ण-स्क्रीन फोटो) -->
+  <section class="screen photo" id="s7">
+    <div class="pbg"><img id="finImg" alt="पप्पांचा आवडता फोटो"></div>
+    <div class="scrim strong"></div>
+    <div class="toran"></div>
+    <div class="bottom">
+      <div class="disp finmsg" id="finMsg"></div>
+      <button class="btn nx" id="restartBtn">पुन्हा सुरुवातीपासून पाहा ↺</button>
+    </div>
+  </section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
